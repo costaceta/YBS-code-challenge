@@ -1,0 +1,50 @@
+.todo__wrapper {
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+.todo__top {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 48px;
+}
+
+.todo__title {
+	font-style: normal;
+	font-weight: 600;
+	font-size: 64px;
+	line-height: 87px;
+}
+
+.todo__add-button {
+	height: 40px;
+	border: none;
+	background: transparent;
+	color: #666666;
+	font-style: normal;
+	font-weight: 600;
+	font-size: 18px;
+	line-height: 25px;
+}
+
+.todo__list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.todo__item {
+	margin-bottom: 62px;
+}
+
+.todo__checkbox {
+	width: 24px;
+	height: 24px;
+	margin-right: 24px;
+	border-radius: 8px;
+	float: left;
+}
+
+.todo__label {
+		font-size: 16px;
+}
