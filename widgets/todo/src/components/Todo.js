@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
+import TodoHeader from './TodoHeader';
+import TodoList from './TodoList';
 
 const Todo = () => {
-	
-		const colorList = [
-			"blue",
-			"purple",
-			"green",
-			"red",
-		]
-
 		const [todos, setTodos] = useState([
 			{
 				text: "Buy bread",
@@ -94,7 +88,19 @@ const Todo = () => {
 			<div className="todo">
 				<div className="todo__wrapper">
 
-					<div className="todo__header">
+					<TodoHeader
+						addTodo={addTodo}
+						handleSubmit={handleSubmit}
+						handleChange={handleChange}
+						isEditing={isEditing}
+						dropdownIsOpen={dropdownIsOpen}
+						selectedColor={selectedColor}
+						todoText={todoText}
+						toggleDropdown={toggleDropdown}
+						changeColor={changeColor}
+					/>
+
+					{/* <div className="todo__header">
 						<h2 className="todo__title">To Do</h2>
 
 						<div className="todo__actions">
@@ -157,9 +163,14 @@ const Todo = () => {
 								}
 							</div>
 						</div>
-					</div>
+					</div> */}
 
-					<ul className="todo__list">
+					<TodoList
+						todos={todos}
+						removeTodo={removeTodo}
+						completeTodo={completeTodo}
+					/>
+					{/* <ul className="todo__list">
 						{ todos && todos.map( (todo, index) => (
 							<li
 								key={index}
@@ -193,7 +204,7 @@ const Todo = () => {
 								</span>
 							</li>
 						)) }
-					</ul>
+					</ul> */}
 				</div>
 			</div>
     );
