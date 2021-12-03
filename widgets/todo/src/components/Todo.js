@@ -32,12 +32,12 @@ const Todo = () => {
 			},
 		]);
 
-		const [inputValue, setInputValue] = useState("");
+		const [todoText, setTodoText] = useState("");
+		const [selectedColor, setSelectedColor] = useState('');
 		const [isEditing, setIsEditing] = useState(false);
 		const [dropdownIsOpen, setdropdownIsOpen] = useState(false);
-		const [selectedColor, setSelectedColor] = useState('');
 
-		const handleClick = () => {
+		const addTodo = () => {
 			setIsEditing(true);
 		}
 
@@ -45,27 +45,27 @@ const Todo = () => {
 			event.preventDefault();
 
 			// Todo: Improve this validation
-			if(!inputValue) {
+			if(!todoText) {
 				alert('Please type a text!');
 				return;
 			}
 
 			const newTodo = {
-				text: inputValue,
+				text: todoText,
 				isCompleted: false,
 				color: selectedColor
 			}
 
 			setTodos([ ...todos,	newTodo	]);
 
-			setInputValue("");
+			setTodoText("");
 			setSelectedColor("");
 			setIsEditing(false);
 			setdropdownIsOpen(false);
 		}
 
 		const handleChange = (event) => {
-			setInputValue(event.target.value);
+			setTodoText(event.target.value);
 		}
 
 		const toggleDropdown = () => {
@@ -100,7 +100,7 @@ const Todo = () => {
 						<div className="todo__actions">
 							<div className="todo__actions_group">
 								{ !isEditing ?
-									<button onClick={handleClick} className="todo__add-button">
+									<button onClick={addTodo} className="todo__add-button">
 										<div className="icon icon--plus">
 											<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 												<path d="M11 9H20V11H11V20H9V11H0V9H9V0H11V9Z" fill="#666666"/>
@@ -146,7 +146,7 @@ const Todo = () => {
 												<input
 													className="form__input"
 													type="text"
-													value={inputValue}
+													value={todoText}
 													placeholder="Buy something"
 													onChange={handleChange}
 													autoFocus
