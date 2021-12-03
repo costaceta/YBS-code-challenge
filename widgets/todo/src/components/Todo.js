@@ -4,28 +4,7 @@ import TodoHeader from './TodoHeader';
 import TodoList from './TodoList';
 
 const Todo = () => {
-		const [todos, setTodos] = useState([
-			{
-				text: "Buy bread",
-				isCompleted: false,
-				color: ''
-			},
-			{
-				text: "Buy toasts",
-				isCompleted: false,
-				color: "purple"
-			},
-			{
-				text: "Buy toasts",
-				isCompleted: false,
-				color: "green"
-			},
-			{
-				text: "Buy toasts",
-				isCompleted: false,
-				color: "red"
-			},
-		]);
+		const [todos, setTodos] = useState([]);
 
 		const [todoText, setTodoText] = useState("");
 		const [selectedColor, setSelectedColor] = useState('');
@@ -97,11 +76,16 @@ const Todo = () => {
 						changeColor={changeColor}
 					/>
 
-					<TodoList
-						todos={todos}
-						removeTodo={removeTodo}
-						completeTodo={completeTodo}
-					/>
+					{ todos.length > 0 ?
+						<TodoList
+							todos={todos}
+							removeTodo={removeTodo}
+							completeTodo={completeTodo}
+						/>
+					:
+						<p className="todo__empty">Create your first "Todo"</p>
+					}
+
 				</div>
 			</div>
     );

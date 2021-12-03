@@ -21,6 +21,7 @@ $color-purple: #7F43FF;
 $color-green: #00A863;
 $color-red: #FF6F59;
 $color-white: #ffffff;
+$color-gray: #666666;
 
 /* Tipography */
 
@@ -38,6 +39,11 @@ $font-family-sans-serif: 'Open Sans', sans-serif;
 
   @include mq(mobile) {
     padding-bottom: 44px;
+  }
+
+  &__empty {
+    font-style: italic;
+    color: $color-gray;
   }
 
   &__wrapper {
@@ -85,7 +91,7 @@ $font-family-sans-serif: 'Open Sans', sans-serif;
   &__add-button {
     background: transparent;
     border: none;
-    color: #666666;
+    color: $color-gray;
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
