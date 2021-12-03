@@ -17,7 +17,7 @@ const TodoHeader = ({
     "purple",
     "green",
     "red",
-  ]
+  ];
 
   return (
     <div className="todo__header">
