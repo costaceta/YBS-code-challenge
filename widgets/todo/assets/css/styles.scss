@@ -1,0 +1,380 @@
+
+/* Mixins */
+@mixin mq($mq-breakpoint, $mq-breakpoints: $breakpoints) {
+  @if map-has-key($mq-breakpoints, $mq-breakpoint) {
+    $mq-breakpoint: map-get($mq-breakpoints, $mq-breakpoint);
+  }
+
+  @media screen and (max-width: #{$mq-breakpoint}) {
+    @content;
+  }
+}
+
+/* Breakpoints */
+$breakpoints: (
+  mobile: 768px,
+);
+
+/* Colors */
+$color-blue: #0892FC;
+$color-purple: #7F43FF;
+$color-green: #00A863;
+$color-red: #FF6F59;
+$color-white: #ffffff;
+
+/* Tipography */
+
+$font-url: 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&display=swap';
+$font-family-sans-serif: 'Open Sans', sans-serif;
+
+@import url($font-url);
+
+/* Todo */
+.todo {
+  font-family: $font-family-sans-serif;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+
+  @include mq(mobile) {
+    padding-bottom: 44px;
+  }
+
+  &__wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  &__header {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  &__title {
+    flex: 1 1 50%;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 87px;
+    margin-bottom: 0;
+
+    @include mq(mobile) {
+      font-size: 32px;
+      padding: 0 24px;
+    }
+  }
+
+  &__actions {
+    flex: 1 1 40%;
+
+    &_group {
+      display: flex;
+    }
+
+    @include mq(mobile) {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 16px 8px;
+    }
+  }
+
+  &__add-button {
+    background: transparent;
+    border: none;
+    color: #666666;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    padding: .375rem .75rem;
+    display: flex;
+    align-items: center;
+  }
+
+  &__checkbox {
+    width: 24px;
+    height: 24px;
+    margin-right: 24px;
+    border-radius: 8px;
+    float: left;
+    display: none;
+
+    + label {
+      display: block;
+      cursor: pointer;
+
+      &:before {
+        content: "\2714";
+        border: 3px solid $color-blue;
+        border-radius: 8px;
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        margin-right: 24px;
+        vertical-align: bottom;
+        color: transparent;
+        transition: .2s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &:active:before {
+        transform: scale(0);
+      }
+    }
+
+    &:checked {
+      + label {
+        &::before {
+          background-color: $color-blue;
+          border-color: $color-blue;
+          color: $color-white;
+        }
+      }
+    }
+
+    &:disabled {
+      + label {
+        &::before {
+          transform: scale(1);
+          border-color: #aaa;
+        }
+      }
+    }
+
+    &:checked:disabled {
+      + label {
+        &:before {
+          transform: scale(1);
+          background-color: #bfb;
+          border-color: #bfb;
+        }
+      }
+    }
+  }
+
+  &__list {
+    list-style: none;
+    margin-right: -24px;
+    margin-left: -24px;
+    padding: 0;
+
+    @include mq(mobile) {
+      padding-bottom: 32px;
+      margin-right: 0px;
+      margin-left: 0px;
+    }
+  }
+
+  &__item {
+    margin-bottom: 24px;
+    position: relative;
+    border-radius: 24px;
+
+    &:hover {
+      .icon--close {
+        display: block;
+      }
+
+      background: linear-gradient(272.09deg, #F5F5F5 32.81%, #DAEFFF 100%);
+      backdrop-filter: blur(50px);
+    }
+
+    &--purple {
+      .todo__checkbox + label::before {
+        border: 3px solid $color-purple;
+      }
+
+      .todo__checkbox:checked + label::before {
+        background-color: $color-purple;
+        border-color: $color-purple;
+        color: $color-white;
+      }
+
+      &:hover {
+        background: linear-gradient(272.09deg, #F5F5F5 32.81%, #F3EDFF 100%);
+        backdrop-filter: blur(50px);
+      }
+    }
+
+    &--green {
+      .todo__checkbox + label::before {
+        border: 3px solid $color-green;
+      }
+
+      .todo__checkbox:checked + label::before {
+        background-color: $color-green;
+        border-color: $color-green;
+        color: $color-white;
+      }
+
+      &:hover {
+        background: linear-gradient(272.09deg, #F5F5F5 32.81%, #E0FFF2 100%);
+        backdrop-filter: blur(50px);
+      }
+    }
+
+    &--red {
+      .todo__checkbox + label::before {
+        border: 3px solid $color-red;
+      }
+
+      .todo__checkbox:checked + label::before {
+        background-color: $color-red;
+        border-color: $color-red;
+        color: $color-white;
+      }
+
+      &:hover {
+        background: linear-gradient(272.09deg, #F5F5F5 32.81%, #FFE1DC 100%);
+        backdrop-filter: blur(50px);
+      }
+    }
+  }
+
+  &__label {
+    font-size: 16px;
+    padding: 24px;
+    border-radius: 24px;
+
+    &--completed {
+      .todo__label--text {
+        text-decoration: line-through;
+        color: rgba(51, 51, 51, 0.5);
+      }
+    }
+
+    svg {
+      display: block;
+    }
+  }
+}
+
+/* icon */
+.icon {
+  display: inline-block;
+
+  svg {
+    display: block;
+  }
+
+  &--plus {
+    margin-right: 24px;
+  }
+
+  &--arrow {
+    padding: 4px 0;
+  }
+
+  &--close {
+    display: none;
+    position: absolute;
+    right: 24px;
+    background-color: #E5E5E5;
+    border-radius: 8px;
+    padding: 8px;
+    height: 32px;
+    width: 32px;
+    top: 50%;
+    margin-top: -16px;
+    cursor: pointer;
+    z-index: 9;
+  }
+}
+
+/* Dropdown */
+
+.dropdown {
+  position: relative;
+
+  &__button {
+    background-color: #F5F5F5;
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    margin-right: 18px;
+
+    span {
+      &:first-child {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  &__menu {
+    margin-top: 4px;
+    border-radius: 8px;
+    background-color: #F5F5F5;
+    padding: 8px 14px;
+    display: inline-flex;
+    position: absolute;
+    left: 0;
+    bottom: -44px;
+
+    @include mq(mobile) {
+      top: -48px;
+      bottom: inherit;
+    }
+
+    span {
+      margin-left: 14px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+
+  &__color {
+    width: 15px;
+    height: 15px;
+    border-radius: 8px;
+    background: $color-blue;
+    display: inline-block;
+    cursor: pointer;
+
+    &--purple {
+      background-color: $color-purple;
+    }
+
+    &--green {
+      background-color: $color-green;
+    }
+
+    &--red {
+      background-color: $color-red;
+    }
+
+    &--big {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &--open {
+    .icon--arrow {
+      transform: rotate(-180deg);
+    }
+  }
+}
+
+/* Form */
+
+.form {
+  &__input {
+    border: none;
+    padding: 2px 8px;
+    font-size: 18px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

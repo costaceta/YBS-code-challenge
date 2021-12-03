@@ -6,5 +6,12 @@
 			"web-context": "/todo"
 		}
 	},
-	"dump-report": true
+	"dump-report": true,
+	"sources": ["src", "assets"],
+	"rules": [
+		{
+			"test": "\\.scss$",
+			"use": ["sass-loader","css-loader"]
+		}
+	]
 }
